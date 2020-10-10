@@ -2,8 +2,8 @@
     --bg: #121416;
     --bg-bright: #1C1F22;
     --bg-dark: #090A0B;
-    --highlight: #00CC66;
-    --hightlight-bright: #00FF80;
+    --theme: #00CC66;
+    --theme-bright: #00FF80;
     --text: #F5F5F5;
 }
 
@@ -14,12 +14,12 @@ body {
 }
 
 a {
-    color: var(--highlight);
+    color: var(--theme);
     text-decoration: none;
 }
 
 a:hover, a:focus, a:active {
-    color: var(--hightlight-bright);
+    color: var(--theme-bright);
 }
 
 /*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
