@@ -5,4 +5,4 @@ export const colors = {
     theme: "#00CC66",
     themeBright: "#00FF80",
     text: "#F5F5F5",
-}
+};
