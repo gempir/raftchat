@@ -1,0 +1,18 @@
+name: Test
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    Deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Test
+              run: |
+                  yarn install
+                  yarn test
+                  yarn build
