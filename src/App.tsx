@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-export function App() {
+export function App(): JSX.Element {
     return (
         <div className="App">
             <header className="App-header">
