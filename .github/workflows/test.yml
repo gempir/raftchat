@@ -11,8 +11,14 @@ jobs:
         steps:
             - uses: actions/checkout@v1
 
-            - name: Test
-              run: |
-                  yarn install
-                  yarn test
-                  yarn build
+            - name: Install
+              run: yarn install
+                  
+            - name: lint
+              run: yarn lint
+              
+            - name: test
+              run: yarn test
+
+            - name: build
+              run: yarn build
