@@ -3,6 +3,6 @@ import { Split } from "./Split";
 
 export function Tab(): JSX.Element {
     return <div>
-        <Split />
+        <Split channel={"xqcow"} />
     </div>;
 }
