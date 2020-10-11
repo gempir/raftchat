@@ -40,8 +40,10 @@
         ]
     },
     "devDependencies": {
+        "@testing-library/react-hooks": "^3.4.2",
         "@types/styled-components": "^5.1.4",
         "@typescript-eslint/eslint-plugin": "^4.4.0",
-        "eslint-config-react-app": "^5.2.1"
+        "eslint-config-react-app": "^5.2.1",
+        "react-test-renderer": "^16.13.1"
     }
 }
