@@ -10,7 +10,7 @@ const MenuContainer = styled.div`
 `;
 
 export function Menu(): JSX.Element {
-    return <MenuContainer>
+	return <MenuContainer>
         Settings
-    </MenuContainer>;
+	</MenuContainer>;
 }

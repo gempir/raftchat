@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { State, store } from "./Store";
 
 export function useStore(): State {
-    const {state} = useContext(store);
+	const {state} = useContext(store);
 
-    return state;
+	return state;
 }
 
 export function useSetStore(): (state: State) => void {
-    const {setState} = useContext(store);
+	const {setState} = useContext(store);
 
-    return setState;
+	return setState;
 }

@@ -8,24 +8,24 @@ export interface State {
 export type Action = Record<string, unknown>;
 
 const defaultContext = {
-    state: {
-        chatClient: new ChatClient({
-            connection: {
-                type: "websocket",
-                secure: true,
-            }
-        }),
-    },
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setState: (state: State) => { },
+	state: {
+		chatClient: new ChatClient({
+			connection: {
+				type: "websocket",
+				secure: true,
+			}
+		}),
+	},
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	setState: (state: State) => { },
 };
 const store = createContext(defaultContext);
 const { Provider } = store;
 
 const StateProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
-    const [state, setState] = useState(defaultContext.state);
+	const [state, setState] = useState(defaultContext.state);
 
-    return <Provider value={{ state, setState }}>{children}</Provider>;
+	return <Provider value={{ state, setState }}>{children}</Provider>;
 };
 
 export { store, StateProvider };

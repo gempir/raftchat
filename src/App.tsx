@@ -7,20 +7,26 @@ import { store } from "./state/Store";
 
 const AppContainer = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
 `;
 
 export function App(): JSX.Element {
-    const {state} = useContext(store);
+	const {state} = useContext(store);
 
-    useEffect(() => {
-        state.chatClient.connect();
-    }, [state.chatClient]);
+	useEffect(() => {
+		state.chatClient.connect();
+	}, [state.chatClient]);
 
-    return (
-        <AppContainer>
-            <Menu />
-            <Tab />
-        </AppContainer>
-    );
+	return (
+		<AppContainer>
+			<Menu />
+			<Tab />
+		</AppContainer>
+	);
 }
