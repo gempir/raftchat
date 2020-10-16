@@ -33,7 +33,7 @@ export function App(): JSX.Element {
 	}, [state.chatClient]);
 
 	return (
-		<AppContainer>
+		<AppContainer className={`mosaic-blueprint-theme ${Classes.DARK}`}>
 			<Menu />
 			<Mosaic<string>
 				className={`mosaic-blueprint-theme ${Classes.DARK}`}
