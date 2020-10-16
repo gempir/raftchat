@@ -24,7 +24,7 @@ const SplitContainer = styled.div`
 const Container = styled.div`
 	background: ${colors.bg};
     color: white;
-	border: 2px solid ${colors.bgBright};
+	border: 1px solid black;
 	padding: 10px;
     display: flex;
     flex-direction: column-reverse;
@@ -38,6 +38,19 @@ const MessageScroll = styled.ul`
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column-reverse;
+
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+	
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: ${colors.bgDark};
+		border-radius: 10px;
+	}
 `;
 
 export function ChatWindow(props: { channel: string }): JSX.Element {

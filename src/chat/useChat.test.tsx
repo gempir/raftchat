@@ -5,8 +5,8 @@ import { useChat } from "./useChat";
 jest.mock("dank-twitch-irc");
 
 test("should join chat", () => {
-	const { result } = renderHook(() => useChat("nymn"));
+	const { result } = renderHook(() => useChat("gempir"));
 
-	expect((ChatClient as jest.Mock).mock.instances[0].join.mock.calls[0][0]).toBe("nymn");
+	expect((ChatClient as jest.Mock).mock.instances[0].join.mock.calls[0][0]).toBe("gempir");
 	expect(result.current.length).toBe(0);
 });
