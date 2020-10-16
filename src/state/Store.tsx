@@ -1,8 +1,11 @@
 import { ChatClient } from "dank-twitch-irc";
 import React, { createContext, useState } from "react";
+import { Settings } from "../chat/Settings";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export interface State {
-    chatClient: ChatClient,
+	chatClient: ChatClient,
+	settings: Settings
 }
 
 export type Action = Record<string, unknown>;
@@ -15,17 +18,24 @@ const defaultContext = {
 				secure: true,
 			}
 		}),
+		settings: { tabs: [] } as Settings
 	},
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	setState: (state: State) => { },
+	setState: (state: State) => { 
+		// do nothing
+	},
+	setSettings: (settings: Settings) => { 
+		// do nothing
+	},
 };
 const store = createContext(defaultContext);
 const { Provider } = store;
 
 const StateProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
-	const [state, setState] = useState(defaultContext.state);
+	const [settings, setSettings] = useLocalStorage("settings", defaultContext.state.settings);
 
-	return <Provider value={{ state, setState }}>{children}</Provider>;
+	const [state, setState] = useState({...defaultContext.state, settings});
+
+	return <Provider value={{ state, setState, setSettings }}>{children}</Provider>;
 };
 
 export { store, StateProvider };

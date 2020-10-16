@@ -5,6 +5,12 @@ import { useChat } from "../chat/useChat";
 import { colors } from "../variables/colors";
 import { Message } from "./Message";
 
+const TabContainer = styled.div`
+	flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+`;
+
 const SplitContainer = styled.div`
     flex-grow: 1;
     flex-basis: 0;
@@ -29,18 +35,21 @@ const MessageScroll = styled.ul`
     list-style-type: none;
     flex-grow: 1;
 	overflow-y: scroll;
+	overflow-x: hidden;
 	display: flex;
 	flex-direction: column-reverse;
 `;
 
-export function Split(props: { channel: string }): JSX.Element {
+export function ChatWindow(props: { channel: string }): JSX.Element {
 	const messages = useChat(props.channel);
 
-	return <SplitContainer>
-		<Container>
-			<MessageScroll>
-				{messages.map((message: PrivmsgMessage) => <li key={message.messageID}><Message message={message} /></li>)}
-			</MessageScroll>
-		</Container>
-	</SplitContainer>;
+	return <TabContainer>
+		<SplitContainer>
+			<Container>
+				<MessageScroll>
+					{messages.map((message: PrivmsgMessage) => <li key={message.messageID}><Message message={message} /></li>)}
+				</MessageScroll>
+			</Container>
+		</SplitContainer>
+	</TabContainer>;
 }
