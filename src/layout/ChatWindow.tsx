@@ -32,12 +32,27 @@ const MessageScroll = styled.ul`
 	}
 `;
 
-export function ChatWindow(props: { channel: string }): JSX.Element {
+export function ChatWindow(props: { channel?: string }): JSX.Element {
+	if (!props.channel) {
+		return <EmptyChatWindow />;
+	}
+
+	return <ChannelChatWindow channel={props.channel} />;
+}
+
+function ChannelChatWindow(props: { channel: string }): JSX.Element {
 	const messages = useChat(props.channel);
 
 	return <ChatWindowContainer>
 		<MessageScroll>
 			{messages.map((message: PrivmsgMessage) => <li key={message.messageID}><Message message={message} /></li>)}
 		</MessageScroll>
+	</ChatWindowContainer>;
+}
+
+function EmptyChatWindow(): JSX.Element {
+
+	return <ChatWindowContainer>
+		no chat
 	</ChatWindowContainer>;
 }

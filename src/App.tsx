@@ -32,7 +32,7 @@ export function App(): JSX.Element {
 			<Mosaic<string>
 				className={`mosaic-blueprint-theme ${Classes.DARK}`}
 				renderTile={(id, path) => 
-					<MosaicWindow<string> path={path} createNode={() => "new"} title={id}>
+					<MosaicWindow<string> path={path} createNode={() => prompt("Enter Channel Name") ?? ""} title={id}>
 						<ChatWindow channel={id} />
 					</MosaicWindow>
 				}

@@ -22,7 +22,7 @@ export function Menu(): JSX.Element {
 
 	return <MenuContainer>
 		Settings
-    
+		<Button icon="refresh" intent={"primary"} />
 		<Button icon="fullscreen" onClick={toggleFullscreen}/>
 	</MenuContainer>;
 }
