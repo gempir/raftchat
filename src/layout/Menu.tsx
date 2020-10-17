@@ -14,6 +14,7 @@ const MenuContainer = styled.div`
 	.bp3-button {
 		min-height: 0;
 		min-width: 0;
+		background: transparent !important;
 	}
 `;
 
@@ -22,7 +23,6 @@ export function Menu(): JSX.Element {
 
 	return <MenuContainer>
 		Settings
-		<Button icon="refresh" intent={"primary"} />
 		<Button icon="fullscreen" onClick={toggleFullscreen}/>
 	</MenuContainer>;
 }

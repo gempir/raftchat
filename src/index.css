@@ -12,6 +12,7 @@ body, html, #root {
 :root {
 	--bg: #121416;
 	--bg-bright: #1C1F22;
+	--bg-brighter: #25292D;
 	--bg-dark: #090A0B;
 	--theme: #00CC66;
 	--theme-bright: #00FF80;

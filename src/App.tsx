@@ -8,6 +8,7 @@ import { ChatWindow } from "./layout/ChatWindow";
 import { Menu } from "./layout/Menu";
 import { store } from "./state/Store";
 import { Classes } from "@blueprintjs/core/lib/esm/common";
+import { colors } from "./variables/colors";
 
 const AppContainer = styled.div`
     display: flex;
@@ -16,6 +17,22 @@ const AppContainer = styled.div`
 
 	.mosaic-window-body {
 		padding: 5px;
+	}
+
+	.mosaic.mosaic-blueprint-theme.bp3-dark {
+		background: ${colors.bgDark};
+
+		.mosaic-window-body {
+			background: ${colors.bg};
+		}
+
+		.mosaic-window-toolbar {
+			background: ${colors.bgBright};
+		}
+
+		.mosaic-window-toolbar.draggable:hover {
+			background: ${colors.bgBrighter};
+		}
 	}
 `;
 

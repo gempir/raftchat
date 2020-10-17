@@ -12,7 +12,7 @@ const MessageContainer = styled.div`
 `;
 
 const Emote = styled.img`
-	margin: 0;
+	margin: 0 3px;
 `;
 
 export function Message({ message }: { message: PrivmsgMessage }): JSX.Element {
