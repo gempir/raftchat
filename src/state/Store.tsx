@@ -20,7 +20,7 @@ const defaultContext = {
 		}),
 		settings: {
 			direction: "row",
-			first: "riotgames",
+			first: "gempir",
 			second: {
 				direction: "column",
 				first: "pokimane",

@@ -13,6 +13,10 @@ const AppContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
+
+	.mosaic-window-body {
+		padding: 5px;
+	}
 `;
 
 export function App(): JSX.Element {

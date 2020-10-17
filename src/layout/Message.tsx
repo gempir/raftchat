@@ -4,11 +4,12 @@ import styled from "styled-components";
 import { User } from "./User";
 
 const MessageContainer = styled.div`
-	margin: 5px 0;
+	margin: 0 0;
+	min-height: 1.2rem;
 `;
 
 const Emote = styled.img`
-	margin: 3px;
+	margin: 0;
 `;
 
 export function Message({ message }: { message: PrivmsgMessage }): JSX.Element {
