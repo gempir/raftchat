@@ -5,7 +5,10 @@ import { User } from "./User";
 
 const MessageContainer = styled.div`
 	margin: 0 0;
-	min-height: 1.2rem;
+	min-height: 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 `;
 
 const Emote = styled.img`
@@ -48,6 +51,6 @@ export function Message({ message }: { message: PrivmsgMessage }): JSX.Element {
 	}
 
 	return <MessageContainer>
-		<User displayName={message.displayName} color={message.colorRaw}/> {renderMessage}
+		<User displayName={message.displayName} color={message.colorRaw} /> {renderMessage}
 	</MessageContainer>;
 }

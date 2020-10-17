@@ -5,9 +5,16 @@ import { useFullScreen } from "../hooks/useFullscreen";
 
 const MenuContainer = styled.div`
     display: flex;
+	align-items: center;
+	padding: 5px;
     width: 100%;
     height: 2rem;
 	justify-content: space-between;
+
+	.bp3-button {
+		min-height: 0;
+		min-width: 0;
+	}
 `;
 
 export function Menu(): JSX.Element {
