@@ -1,11 +1,11 @@
 import { ChatClient } from "dank-twitch-irc";
 import React, { createContext, useState } from "react";
-import { Settings } from "../chat/Settings";
+import { MosaicParent } from "react-mosaic-component";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export interface State {
 	chatClient: ChatClient,
-	settings: Settings
+	settings: MosaicParent<string>
 }
 
 export type Action = Record<string, unknown>;
@@ -18,12 +18,21 @@ const defaultContext = {
 				secure: true,
 			}
 		}),
-		settings: { tabs: [] } as Settings
+		settings: {
+			direction: "row",
+			first: "riotgames",
+			second: {
+				direction: "column",
+				first: "pokimane",
+				second: "pajlada",
+			},
+			splitPercentage: 40,
+		} as MosaicParent<string>
 	},
 	setState: (state: State) => { 
 		// do nothing
 	},
-	setSettings: (settings: Settings) => { 
+	setSettings: (settings: MosaicParent<string>) => { 
 		// do nothing
 	},
 };

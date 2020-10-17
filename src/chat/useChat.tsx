@@ -2,7 +2,7 @@ import { PrivmsgMessage } from "dank-twitch-irc";
 import { useCallback, useEffect, useState } from "react";
 import { useStore } from "../state/useStore";
 
-export function useChat(channel: string, bufferSize = 500): Array<PrivmsgMessage> {
+export function useChat(channel: string, bufferSize = 100): Array<PrivmsgMessage> {
 	const { chatClient } = useStore();
 
 	const [messages, setMessages] = useState<Array<PrivmsgMessage>>([]);

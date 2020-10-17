@@ -5,8 +5,6 @@ import { User } from "./User";
 
 const MessageContainer = styled.div`
 	margin: 5px 0;
-	display: flex;
-	align-items: center;
 `;
 
 const Emote = styled.img`
