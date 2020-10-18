@@ -9,6 +9,7 @@ import { Menu } from "./layout/Menu";
 import { store } from "./state/Store";
 import { Classes } from "@blueprintjs/core/lib/esm/common";
 import { colors } from "./variables/colors";
+import { ReactQueryCacheProvider } from "react-query";
 
 const AppContainer = styled.div`
     display: flex;
@@ -44,17 +45,19 @@ export function App(): JSX.Element {
 	}, [state.chatClient]);
 
 	return (
-		<AppContainer className={`mosaic-blueprint-theme ${Classes.DARK}`}>
-			<Menu />
-			<Mosaic<string>
-				className={`mosaic-blueprint-theme ${Classes.DARK}`}
-				renderTile={(id, path) => 
-					<MosaicWindow<string> path={path} createNode={() => prompt("Enter Channel Name") ?? ""} title={id}>
-						<ChatWindow channel={id} />
-					</MosaicWindow>
-				}
-				initialValue={state.settings}
-			/>
-		</AppContainer>
+		<ReactQueryCacheProvider queryCache={state.queryCache}>
+			<AppContainer className={`mosaic-blueprint-theme ${Classes.DARK}`}>
+				<Menu />
+				<Mosaic<string>
+					className={`mosaic-blueprint-theme ${Classes.DARK}`}
+					renderTile={(id, path) =>
+						<MosaicWindow<string> path={path} createNode={() => prompt("Enter Channel Name") ?? ""} title={id}>
+							<ChatWindow channel={id} />
+						</MosaicWindow>
+					}
+					initialValue={state.settings}
+				/>
+			</AppContainer>
+		</ReactQueryCacheProvider>
 	);
 }

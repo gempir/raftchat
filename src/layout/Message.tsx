@@ -1,6 +1,7 @@
 import { PrivmsgMessage } from "dank-twitch-irc";
 import React from "react";
 import styled from "styled-components";
+import { ThirdPartyEmote } from "../types/ThirdPartyEmote";
 import { User } from "./User";
 
 const MessageContainer = styled.div`
@@ -15,7 +16,7 @@ const Emote = styled.img`
 	margin: 0 3px;
 `;
 
-export function Message({ message }: { message: PrivmsgMessage }): JSX.Element {
+export const Message = React.memo(function Message({ message, thirdPartyEmotes }: { message: PrivmsgMessage, thirdPartyEmotes: Array<ThirdPartyEmote> }): JSX.Element {
 
 	const renderMessage = [];
 
@@ -40,12 +41,30 @@ export function Message({ message }: { message: PrivmsgMessage }): JSX.Element {
 		}
 
 		if (!replaced) {
-			if (c !== " " && x !== message.messageText.length - 1) {
+			if (c !== " " && x !== message.messageText.length) {
 				buffer += c;
 				continue;
 			}
-			renderMessage.push(buffer);
-			buffer = "";
+			let emoteFound = false;
+
+			for (const emote of thirdPartyEmotes) {
+				if (buffer.trim() === emote.code) {
+					renderMessage.push(<Emote
+						key={x}
+						alt={emote.code}
+						src={emote.urls.small}
+					/>);
+					emoteFound = true;
+					buffer = "";
+
+					break;
+				}
+			}
+
+			if (!emoteFound) {
+				renderMessage.push(buffer);
+				buffer = "";
+			}
 			renderMessage.push(c);
 		}
 	}
@@ -53,4 +72,4 @@ export function Message({ message }: { message: PrivmsgMessage }): JSX.Element {
 	return <MessageContainer>
 		<User displayName={message.displayName} color={message.colorRaw} /> {renderMessage}
 	</MessageContainer>;
-}
+}, () => true);

@@ -1,11 +1,13 @@
 import { ChatClient } from "dank-twitch-irc";
 import React, { createContext, useState } from "react";
 import { MosaicParent } from "react-mosaic-component";
+import { QueryCache } from "react-query";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export interface State {
 	chatClient: ChatClient,
-	settings: MosaicParent<string>
+	settings: MosaicParent<string>,
+	queryCache: QueryCache,
 }
 
 export type Action = Record<string, unknown>;
@@ -20,19 +22,20 @@ const defaultContext = {
 		}),
 		settings: {
 			direction: "row",
-			first: "gempir",
+			first: "nymn",
 			second: {
 				direction: "column",
 				first: "pokimane",
 				second: "pajlada",
 			},
 			splitPercentage: 40,
-		} as MosaicParent<string>
+		} as MosaicParent<string>,
+		queryCache: new QueryCache(),
 	},
-	setState: (state: State) => { 
+	setState: (state: State) => {
 		// do nothing
 	},
-	setSettings: (settings: MosaicParent<string>) => { 
+	setSettings: (settings: MosaicParent<string>) => {
 		// do nothing
 	},
 };
@@ -42,7 +45,7 @@ const { Provider } = store;
 const StateProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const [settings, setSettings] = useLocalStorage("settings", defaultContext.state.settings);
 
-	const [state, setState] = useState({...defaultContext.state, settings});
+	const [state, setState] = useState({ ...defaultContext.state, settings });
 
 	return <Provider value={{ state, setState, setSettings }}>{children}</Provider>;
 };

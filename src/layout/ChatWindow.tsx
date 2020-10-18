@@ -2,6 +2,8 @@ import { PrivmsgMessage } from "dank-twitch-irc";
 import React from "react";
 import styled from "styled-components";
 import { useChat } from "../chat/useChat";
+import { useBttvChannelEmotes } from "../hooks/useBttvChannelEmotes";
+import { ThirdPartyEmote } from "../types/ThirdPartyEmote";
 import { Message } from "./Message";
 
 const ChatWindowContainer = styled.div`
@@ -42,10 +44,12 @@ export function ChatWindow(props: { channel?: string }): JSX.Element {
 
 function ChannelChatWindow(props: { channel: string }): JSX.Element {
 	const messages = useChat(props.channel);
-
+	const channelId = messages.length > 0 ? messages[0].channelID : "";
+	const thirdPartyEmotes: Array<ThirdPartyEmote> = [...useBttvChannelEmotes(channelId)];
+	
 	return <ChatWindowContainer>
 		<MessageScroll>
-			{messages.map((message: PrivmsgMessage) => <li key={message.messageID}><Message message={message} /></li>)}
+			{messages.map((message: PrivmsgMessage) => <li key={message.messageID}><Message message={message} thirdPartyEmotes={thirdPartyEmotes} /></li>)}
 		</MessageScroll>
 	</ChatWindowContainer>;
 }
