@@ -12,6 +12,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
 		} catch (error) {
 			// If error also return initialValue
 			console.log(error);
+			setValue(initialValue);
 			return initialValue;
 		}
 	});

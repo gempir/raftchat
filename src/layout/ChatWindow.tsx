@@ -1,14 +1,23 @@
+import { Button, InputGroup, Tooltip } from "@blueprintjs/core";
 import { PrivmsgMessage } from "dank-twitch-irc";
-import React from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import styled from "styled-components";
 import { useChat } from "../chat/useChat";
 import { useThirdPartyEmotes } from "../hooks/useThirdPartyEmotes";
+import { store } from "../state/Store";
 import { Message } from "./Message";
 
 const ChatWindowContainer = styled.div`
 	flex-grow: 1;
     display: flex;
     flex-direction: column;
+	height: 100%;
+`;
+
+const NoChatWindowContainer = styled.div`
+    display: flex;
+	align-items: center;
+    justify-content: center;
 	height: 100%;
 `;
 
@@ -33,9 +42,9 @@ const MessageScroll = styled.ul`
 	}
 `;
 
-export function ChatWindow(props: { channel?: string }): JSX.Element {
+export function ChatWindow(props: { channel?: string, id: string }): JSX.Element {
 	if (!props.channel) {
-		return <EmptyChatWindow />;
+		return <EmptyChatWindow id={props.id} />;
 	}
 
 	return <ChannelChatWindow channel={props.channel} />;
@@ -53,9 +62,27 @@ function ChannelChatWindow(props: { channel: string }): JSX.Element {
 	</ChatWindowContainer>;
 }
 
-function EmptyChatWindow(): JSX.Element {
+function EmptyChatWindow({ id }: { id: string }): JSX.Element {
+	const {state, setState} = useContext(store);
+	const [channel, setChannel] = useState("");
 
-	return <ChatWindowContainer>
-		no chat
-	</ChatWindowContainer>;
+	const submitButton = (
+		<Tooltip content={"Join"}>
+			<Button
+				icon={"chat"}
+				minimal={true}
+				onClick={() => setState({...state, channels: {...state.channels, [id]: channel}})}
+			/>
+		</Tooltip>
+	);
+
+	return <NoChatWindowContainer>
+		<InputGroup
+			onChange={(e: React.FormEvent<HTMLElement>) => setChannel((e.target as HTMLInputElement).value)}
+			placeholder="channel"
+			large
+			rightElement={submitButton}
+			type={"text"}
+		/>
+	</NoChatWindowContainer>;
 }

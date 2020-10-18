@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const UserContainer = styled.div`
+
+
+const UserContainer = styled.div.attrs(props => ({
+	style: {
+		color: props.color,
+	}
+}))`
 	display: inline-block;
 	color: ${props => props.color};
 	margin-right: 3px;

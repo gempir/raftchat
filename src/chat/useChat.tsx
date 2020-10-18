@@ -20,6 +20,11 @@ export function useChat(channel: string, bufferSize = 100): Array<PrivmsgMessage
 	}, [bufferSize, channel, messages]);
 
 	useEffect((): () => void => {
+		if (channel === "") {
+			return () => {
+				// do nothing
+			};
+		}
 		chatClient.join(channel);
 		chatClient.on("PRIVMSG", handleMessage);
 

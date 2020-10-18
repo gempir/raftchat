@@ -10,6 +10,7 @@ import { store } from "./state/Store";
 import { Classes } from "@blueprintjs/core/lib/esm/common";
 import { colors } from "./variables/colors";
 import { ReactQueryCacheProvider } from "react-query";
+import { createRandomString } from "./services/createRandomString";
 
 const AppContainer = styled.div`
     display: flex;
@@ -44,6 +45,15 @@ export function App(): JSX.Element {
 		state.chatClient.connect();
 	}, [state.chatClient]);
 
+	// find a better soluton for this
+	useEffect(() => {
+		window.localStorage.setItem("channels", JSON.stringify(state.channels));
+	}, [state.channels]);
+
+	useEffect(() => {
+		window.localStorage.setItem("settings", JSON.stringify(state.settings));
+	}, [state.settings]);
+
 	return (
 		<ReactQueryCacheProvider queryCache={state.queryCache}>
 			<AppContainer className={`mosaic-blueprint-theme ${Classes.DARK}`}>
@@ -51,8 +61,8 @@ export function App(): JSX.Element {
 				<Mosaic<string>
 					className={`mosaic-blueprint-theme ${Classes.DARK}`}
 					renderTile={(id, path) =>
-						<MosaicWindow<string> path={path} createNode={() => prompt("Enter Channel Name") ?? ""} title={id}>
-							<ChatWindow channel={id} />
+						<MosaicWindow<string> path={path} createNode={createRandomString} title={state.channels[id] ?? ""}>
+							<ChatWindow channel={state.channels[id] ?? ""} id={id} />
 						</MosaicWindow>
 					}
 					initialValue={state.settings}
