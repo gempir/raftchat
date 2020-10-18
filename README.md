@@ -1,2 +1,2 @@
-# Riftchat
+# Raftchat
 
