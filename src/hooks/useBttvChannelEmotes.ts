@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { BttvChannelEmotesResponse } from "../types/BttvChannelEmotesResponse";
+import { BttvChannelEmotesResponse } from "../types/Bttv";
 import { ThirdPartyEmote } from "../types/ThirdPartyEmote";
 
 export function useBttvChannelEmotes(channelId: string): Array<ThirdPartyEmote> {

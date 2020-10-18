@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { useChat } from "../chat/useChat";
 import { useBttvChannelEmotes } from "../hooks/useBttvChannelEmotes";
+import { useBttvGlobalEmotes } from "../hooks/useBttvGlobalEmotes";
 import { useFfzChannelEmotes } from "../hooks/useFfzChannelEmotes";
 import { ThirdPartyEmote } from "../types/ThirdPartyEmote";
 import { Message } from "./Message";
@@ -46,7 +47,7 @@ export function ChatWindow(props: { channel?: string }): JSX.Element {
 function ChannelChatWindow(props: { channel: string }): JSX.Element {
 	const messages = useChat(props.channel);
 	const channelId = messages.length > 0 ? messages[0].channelID : "";
-	const thirdPartyEmotes: Array<ThirdPartyEmote> = [...useBttvChannelEmotes(channelId), ...useFfzChannelEmotes(channelId)];
+	const thirdPartyEmotes: Array<ThirdPartyEmote> = [...useBttvChannelEmotes(channelId), ...useFfzChannelEmotes(channelId), ...useBttvGlobalEmotes()];
 	
 	return <ChatWindowContainer>
 		<MessageScroll>

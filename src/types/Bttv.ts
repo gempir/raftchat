@@ -5,6 +5,8 @@ export interface BttvChannelEmotesResponse {
     sharedEmotes: Emote[];
 }
 
+export type BttvGlobalEmotesResponse = Emote[];
+
 export interface Emote {
     id: string;
     code: string;
