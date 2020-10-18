@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { EmoteSet, FfzChannelEmotesResponse } from "../types/FfzChannelEmotesResponse";
+import { EmoteSet, FfzChannelEmotesResponse } from "../types/Ffz";
 import { ThirdPartyEmote } from "../types/ThirdPartyEmote";
 
 export function useFfzChannelEmotes(channelId: string): Array<ThirdPartyEmote> {
