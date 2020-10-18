@@ -22,7 +22,7 @@ const defaultContext = {
 		}),
 		settings: {
 			direction: "row",
-			first: "nymn",
+			first: "gempir",
 			second: {
 				direction: "column",
 				first: "pokimane",

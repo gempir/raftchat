@@ -9,7 +9,7 @@ export function useFfzGlobalEmotes(): Array<ThirdPartyEmote> {
 		);
 	});
 
-	if (isLoading || !data?.set) {
+	if (isLoading || !data?.sets) {
 		return [];
 	}
 
@@ -20,7 +20,7 @@ export function useFfzGlobalEmotes(): Array<ThirdPartyEmote> {
 
 	const emotes = [];
 
-	for (const set of Object.values(data.set) as Array<EmoteSet>) {
+	for (const set of Object.values(data.sets) as Array<EmoteSet>) {
 		for (const channelEmote of set.emoticons) {
 			emotes.push({
 				id: String(channelEmote.id),

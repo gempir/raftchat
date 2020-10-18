@@ -45,7 +45,7 @@ function ChannelChatWindow(props: { channel: string }): JSX.Element {
 	const messages = useChat(props.channel);
 	const channelId = messages.length > 0 ? messages[0].channelID : "";
 	const thirdPartyEmotes = useThirdPartyEmotes(channelId);
-	
+
 	return <ChatWindowContainer>
 		<MessageScroll>
 			{messages.map((message: PrivmsgMessage) => <li key={message.messageID}><Message message={message} thirdPartyEmotes={thirdPartyEmotes} /></li>)}

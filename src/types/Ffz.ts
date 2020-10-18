@@ -4,7 +4,7 @@ export interface FfzChannelEmotesResponse {
 }
 
 export interface FfzGlobalEmotesResponse {
-    set: EmoteSet;
+    sets: Sets;
 }
 
 // export interface Room {
