@@ -9,7 +9,6 @@ const UserContainer = styled.div.attrs(props => ({
 	}
 }))`
 	display: inline-block;
-	color: ${props => props.color};
 	margin-right: 3px;
 	font-weight: bold;
 `;
