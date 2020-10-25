@@ -3,6 +3,7 @@ import React, { createContext, useState } from "react";
 import { MosaicNode } from "react-mosaic-component";
 import { QueryCache } from "react-query";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { listAllSplits } from "../services/listAllSplits";
 
 export interface State {
 	chatClient: ChatClient,
@@ -28,7 +29,7 @@ const defaultContext = {
 	setState: (state: State) => {
 		// do nothing
 	},
-	setSettings: (settings: MosaicNode<string> | null) => {
+	setSettings: (settings: MosaicNode<string> | null, channels: Record<string, string>) => {
 		// do nothing
 	},
 	setChannels: (channels: Record<string, string>) => {
@@ -41,10 +42,25 @@ const { Provider } = store;
 
 const StateProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
 	
-	const [settings, setSettings] = useLocalStorage("settings", defaultContext.state.settings);
+	const [settings, setSettingsStorage] = useLocalStorage("settings", defaultContext.state.settings);
 	const [channels, setChannels] = useLocalStorage("channels", defaultContext.state.channels);
 
 	const [state, setState] = useState({ ...defaultContext.state, settings, channels });
+
+	const setSettings = (settings: MosaicNode<string> | null, channels: Record<string, string>) => {
+
+		const newChannels = {...channels};
+		const allSplits = listAllSplits(settings);
+		const channelsToDelete = Object.keys(channels).filter(channelKey => !allSplits.includes(channelKey));
+
+		for (const toDelete of channelsToDelete) {
+			delete newChannels[toDelete];
+		}
+
+		setSettingsStorage(settings);
+		setChannels(newChannels);
+		setState({...state, settings: settings, channels: newChannels});
+	};
 
 	return <Provider value={{ state, setState, setSettings, setChannels }}>{children}</Provider>;
 };

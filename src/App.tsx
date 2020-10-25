@@ -65,7 +65,7 @@ export function App(): JSX.Element {
 							<ChatWindow channel={state.channels[id] ?? ""} id={id} />
 						</MosaicWindow>
 					}
-					onRelease={setSettings}
+					onRelease={(newNode) => setSettings(newNode, state.channels)}
 					initialValue={state.settings}
 					zeroStateView={<ChatWindow id={createRandomString()} />}
 				/>
