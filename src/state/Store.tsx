@@ -1,13 +1,13 @@
 import { ChatClient } from "dank-twitch-irc";
 import React, { createContext, useState } from "react";
-import { MosaicParent } from "react-mosaic-component";
+import { MosaicNode } from "react-mosaic-component";
 import { QueryCache } from "react-query";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { createRandomString } from "../services/createRandomString";
 
 export interface State {
 	chatClient: ChatClient,
-	settings: MosaicParent<string>,
+	settings: MosaicNode<string> | null,
 	channels: Record<string, string>,
 	queryCache: QueryCache,
 }
@@ -28,13 +28,13 @@ const defaultContext = {
 			first: createRandomString(),
 			second: createRandomString(),
 			splitPercentage: 40,
-		} as MosaicParent<string>,
+		} as MosaicNode<string> | null,
 		queryCache: new QueryCache(),
 	},
 	setState: (state: State) => {
 		// do nothing
 	},
-	setSettings: (settings: MosaicParent<string>) => {
+	setSettings: (settings: MosaicNode<string> | null) => {
 		// do nothing
 	},
 	setChannels: (channels: Record<string, string>) => {

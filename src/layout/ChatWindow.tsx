@@ -1,9 +1,10 @@
 import { Button, InputGroup, Tooltip } from "@blueprintjs/core";
 import { PrivmsgMessage } from "dank-twitch-irc";
-import React, { FormEvent, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useChat } from "../chat/useChat";
 import { useThirdPartyEmotes } from "../hooks/useThirdPartyEmotes";
+import { createRandomString } from "../services/createRandomString";
 import { store } from "../state/Store";
 import { Message } from "./Message";
 
@@ -63,26 +64,41 @@ function ChannelChatWindow(props: { channel: string }): JSX.Element {
 }
 
 function EmptyChatWindow({ id }: { id: string }): JSX.Element {
-	const {state, setState} = useContext(store);
+	const { state, setState } = useContext(store);
 	const [channel, setChannel] = useState("");
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		if (e.target instanceof HTMLFormElement) {
+			const newState = { ...state, channels: { ...state.channels, [id]: channel } };
+			if (state.settings === null) {
+				newState.settings = id;
+			}
+			setState(newState);
+		}
+	};
 
 	const submitButton = (
 		<Tooltip content={"Join"}>
 			<Button
 				icon={"chat"}
+				type="submit"
 				minimal={true}
-				onClick={() => setState({...state, channels: {...state.channels, [id]: channel}})}
 			/>
 		</Tooltip>
 	);
 
 	return <NoChatWindowContainer>
-		<InputGroup
-			onChange={(e: React.FormEvent<HTMLElement>) => setChannel((e.target as HTMLInputElement).value)}
-			placeholder="channel"
-			large
-			rightElement={submitButton}
-			type={"text"}
-		/>
+		<form onSubmit={handleSubmit}>
+			<InputGroup
+				placeholder="channel"
+				name="channel"
+				value={channel}
+				onChange={(e: React.FormEvent<HTMLElement>) => setChannel((e.target as HTMLInputElement).value)}
+				large
+				rightElement={submitButton}
+				type={"text"}
+			/>
+		</form>
 	</NoChatWindowContainer>;
 }

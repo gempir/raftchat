@@ -1,16 +1,16 @@
-import "react-mosaic-component/react-mosaic-component.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
+import { Classes } from "@blueprintjs/core/lib/esm/common";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import React, { useContext, useEffect } from "react";
 import { Mosaic, MosaicWindow } from "react-mosaic-component";
+import "react-mosaic-component/react-mosaic-component.css";
+import { ReactQueryCacheProvider } from "react-query";
 import styled from "styled-components";
 import { ChatWindow } from "./layout/ChatWindow";
 import { Menu } from "./layout/Menu";
-import { store } from "./state/Store";
-import { Classes } from "@blueprintjs/core/lib/esm/common";
-import { colors } from "./variables/colors";
-import { ReactQueryCacheProvider } from "react-query";
 import { createRandomString } from "./services/createRandomString";
+import { store } from "./state/Store";
+import { colors } from "./variables/colors";
 
 const AppContainer = styled.div`
     display: flex;
@@ -39,7 +39,7 @@ const AppContainer = styled.div`
 `;
 
 export function App(): JSX.Element {
-	const { state } = useContext(store);
+	const { state, setSettings } = useContext(store);
 
 	useEffect(() => {
 		state.chatClient.connect();
@@ -65,7 +65,9 @@ export function App(): JSX.Element {
 							<ChatWindow channel={state.channels[id] ?? ""} id={id} />
 						</MosaicWindow>
 					}
+					onRelease={setSettings}
 					initialValue={state.settings}
+					zeroStateView={<ChatWindow id={createRandomString()} />}
 				/>
 			</AppContainer>
 		</ReactQueryCacheProvider>
