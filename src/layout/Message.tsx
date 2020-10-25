@@ -1,5 +1,6 @@
 import { PrivmsgMessage } from "dank-twitch-irc";
 import React from "react";
+import Linkify from "react-linkify";
 import styled from "styled-components";
 import { ThirdPartyEmote } from "../types/ThirdPartyEmote";
 import { User } from "./User";
@@ -62,7 +63,11 @@ export const Message = React.memo(function Message({ message, thirdPartyEmotes }
 			}
 
 			if (!emoteFound) {
-				renderMessage.push(buffer);
+				renderMessage.push(<Linkify key={x} componentDecorator={(decoratedHref, decoratedText, key) => (
+					<a target="__blank" href={decoratedHref} key={key}>
+						{decoratedText}
+					</a>
+				)}>{buffer}</Linkify>);
 				buffer = "";
 			}
 			renderMessage.push(c);
