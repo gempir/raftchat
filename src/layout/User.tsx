@@ -15,8 +15,10 @@ const UserContainer = styled.div.attrs(props => ({
 `;
 
 export function User({ displayName, color }: { displayName: string, color: string }): JSX.Element {
+	
+	const renderColor = color !== "" ? color : "grey";
 
-	return <UserContainer color={color}>
+	return <UserContainer color={renderColor}>
 		{displayName}:
 	</UserContainer>;
 }
