@@ -4,7 +4,6 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useChat } from "../chat/useChat";
 import { useThirdPartyEmotes } from "../hooks/useThirdPartyEmotes";
-import { createRandomString } from "../services/createRandomString";
 import { store } from "../state/Store";
 import { Message } from "./Message";
 
