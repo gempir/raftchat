@@ -17,10 +17,6 @@ const AppContainer = styled.div`
     flex-direction: column;
     height: 100%;
 
-	.mosaic-window-body {
-		padding: 5px;
-	}
-
 	.mosaic.mosaic-blueprint-theme.bp3-dark {
 		background: ${colors.bgDark};
 

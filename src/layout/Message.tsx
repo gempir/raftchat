@@ -8,6 +8,7 @@ import { User } from "./User";
 const MessageContainer = styled.div`
 	margin: 0 0;
 	min-height: 1.5rem;
+	padding: 0 5px;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
