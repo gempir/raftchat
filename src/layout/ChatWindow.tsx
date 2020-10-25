@@ -69,7 +69,7 @@ function EmptyChatWindow({ id }: { id: string }): JSX.Element {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (e.target instanceof HTMLFormElement) {
-			const newState = { ...state, channels: { ...state.channels, [id]: channel } };
+			const newState = { ...state, channels: { ...state.channels, [id]: channel.toLowerCase() } };
 			if (state.settings === null) {
 				newState.settings = id;
 			}
