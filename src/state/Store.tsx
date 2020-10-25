@@ -3,7 +3,6 @@ import React, { createContext, useState } from "react";
 import { MosaicNode } from "react-mosaic-component";
 import { QueryCache } from "react-query";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { createRandomString } from "../services/createRandomString";
 
 export interface State {
 	chatClient: ChatClient,
@@ -22,15 +21,10 @@ const defaultContext = {
 				secure: true,
 			}
 		}),
-		channels: {} as Record<string, string>,
-		settings: {
-			direction: "row",
-			first: createRandomString(),
-			second: createRandomString(),
-			splitPercentage: 40,
-		} as MosaicNode<string> | null,
+		channels: {},
+		settings: null,
 		queryCache: new QueryCache(),
-	},
+	} as State,
 	setState: (state: State) => {
 		// do nothing
 	},
